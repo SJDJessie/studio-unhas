@@ -4,6 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Studio de Unhas</title>
@@ -24,7 +25,7 @@ color:#333;
 }
 
 .container{
-max-width:750px;
+max-width:700px;
 margin:auto;
 }
 
@@ -52,34 +53,18 @@ margin-bottom:20px;
 box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
-.service{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:12px;
-border-bottom:1px solid #eee;
-}
-
-.service label{
-font-size:18px;
-font-weight:bold;
+.card h2{
+color:#c2185b;
+margin-bottom:10px;
 }
 
 .price{
-color:#c2185b;
+font-size:22px;
 font-weight:bold;
+margin-bottom:15px;
 }
 
-input[type="checkbox"]{
-transform:scale(1.4);
-margin-right:10px;
-}
-
-.inputs{
-margin-top:20px;
-}
-
-.inputs input{
+input{
 width:100%;
 padding:12px;
 margin-bottom:10px;
@@ -88,30 +73,21 @@ border:1px solid #ccc;
 font-size:16px;
 }
 
-.total{
-margin-top:20px;
-font-size:24px;
-font-weight:bold;
-text-align:center;
-color:#d81b60;
-}
-
 .buttons{
 display:flex;
 gap:10px;
-margin-top:20px;
 flex-wrap:wrap;
 }
 
 .btn{
 flex:1;
-padding:14px;
+padding:12px;
 border:none;
 border-radius:12px;
-font-size:16px;
 font-weight:bold;
 cursor:pointer;
 transition:0.3s;
+font-size:16px;
 }
 
 .whatsapp{
@@ -128,6 +104,13 @@ color:white;
 opacity:0.85;
 }
 
+.footer{
+text-align:center;
+margin-top:30px;
+font-size:14px;
+color:#777;
+}
+
 </style>
 
 </head>
@@ -141,48 +124,16 @@ opacity:0.85;
 <h1>💅 Studio de Unhas</h1>
 
 <p>
-✨ Escolha seus serviços favoritos e agende seu horário facilmente pelo WhatsApp 💖
+Agende seu horário pelo WhatsApp ✨
 </p>
 
 </div>
 
-<div class="card">
-
 <div id="services"></div>
 
-<div class="inputs">
+<div class="footer">
 
-<input type="date" id="date">
-
-<input type="time" id="time">
-
-</div>
-
-<div class="total" id="total">
-
-Total: R$ 0
-
-</div>
-
-<div class="buttons">
-
-<button class="btn whatsapp"
-
-onclick="marcarHorario()">
-
-📅 Marcar horário
-
-</button>
-
-<button class="btn pix"
-
-onclick="pagarPix()">
-
-💳 Pagar com Pix
-
-</button>
-
-</div>
+Atendimento com qualidade e carinho 💖
 
 </div>
 
@@ -198,146 +149,101 @@ const services = [
 
 {
 name:'Alongamento de fibra',
-price:200
+price:'R$ 200'
 },
 
 {
 name:'Manutenção de alongamento de fibra',
-price:120
+price:'R$ 120'
 },
 
 {
 name:'Alongamento de gel',
-price:120
+price:'R$ 120'
 },
 
 {
 name:'Manutenção de gel',
-price:80
+price:'R$ 80'
 },
 
 {
 name:'Banho de gel',
-price:80
+price:'R$ 80'
 },
 
 {
 name:'Unha normal',
-price:30
+price:'R$ 30'
 },
 
 {
 name:'Unha postiça',
-price:100
+price:'R$ 100'
 }
 
 ];
 
 const container = document.getElementById('services');
 
-services.forEach((service,index)=>{
+services.forEach(service=>{
 
-container.innerHTML += `
+const card = document.createElement('div');
 
-<div class="service">
+card.className='card';
 
-<label>
+card.innerHTML = `
 
-<input type="checkbox"
+<h2>${service.name}</h2>
 
-value="${service.price}"
+<div class="price">${service.price}</div>
 
-data-name="${service.name}"
+<input type="date" id="date-${service.name}">
 
-onchange="calcularTotal()">
+<input type="time" id="time-${service.name}">
 
-${service.name}
+<div class="buttons">
 
-</label>
+<button class="btn whatsapp"
 
-<span class="price">
+onclick="marcarHorario('${service.name}','${service.price}')">
 
-R$ ${service.price}
+📅 Marcar horário
 
-</span>
+</button>
+
+<button class="btn pix"
+
+onclick="pagarPix('${service.name}','${service.price}')">
+
+💳 Pagar com Pix
+
+</button>
 
 </div>
 
 `;
 
-});
-
-function calcularTotal(){
-
-const checkboxes = document.querySelectorAll('input[type=\"checkbox\"]');
-
-let total = 0;
-
-checkboxes.forEach(box=>{
-
-if(box.checked){
-
-total += Number(box.value);
-
-}
+container.appendChild(card);
 
 });
 
-document.getElementById('total').innerText =
+function marcarHorario(servico,preco){
 
-'Total: R$ ' + total;
+const data =
 
-}
+document.getElementById('date-'+servico).value;
 
-function pegarServicos(){
+const hora =
 
-const checkboxes = document.querySelectorAll('input[type=\"checkbox\"]');
-
-let servicos = [];
-
-let total = 0;
-
-checkboxes.forEach(box=>{
-
-if(box.checked){
-
-servicos.push(box.dataset.name);
-
-total += Number(box.value);
-
-}
-
-});
-
-return {servicos,total};
-
-}
-
-function marcarHorario(){
-
-const dados = pegarServicos();
-
-const data = document.getElementById('date').value;
-
-const hora = document.getElementById('time').value;
-
-if(dados.servicos.length === 0){
-
-alert('Escolha pelo menos um serviço');
-
-return;
-
-}
+document.getElementById('time-'+servico).value;
 
 const mensagem =
 
 `Olá! Quero agendar:
 
-Serviços:
-- ${dados.servicos.join('\\n- ')}
-
-Total: R$ ${dados.total}
-
+Serviço: ${servico}
+Preço: ${preco}
 Data: ${data}
 Hora: ${hora}`;
 
@@ -349,33 +255,17 @@ window.open(link,'_blank');
 
 }
 
-function pagarPix(){
-
-const dados = pegarServicos();
-
-if(dados.servicos.length === 0){
-
-alert('Escolha pelo menos um serviço');
-
-return;
-
-}
+function pagarPix(servico,preco){
 
 navigator.clipboard.writeText(pixKey);
 
 alert(
 
-'Serviços escolhidos:\\n- ' +
+'Serviço: ' + servico +
 
-dados.servicos.join('\\n- ') +
+'\\nValor: ' + preco +
 
-'\\n\\nTotal: R$ ' +
-
-dados.total +
-
-'\\n\\nChave Pix copiada:\\n' +
-
-pixKey
+'\\n\\nChave Pix copiada:\\n' + pixKey
 
 );
 
