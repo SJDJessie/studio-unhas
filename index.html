@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Studio de Unhas</title>
@@ -12,7 +15,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, sans-serif;
+font-family:Arial,sans-serif;
 }
 
 body{
@@ -32,7 +35,7 @@ margin-bottom:30px;
 }
 
 .header h1{
-font-size:38px;
+font-size:40px;
 color:#d81b60;
 margin-bottom:10px;
 }
@@ -81,11 +84,10 @@ flex:1;
 padding:12px;
 border:none;
 border-radius:12px;
-text-align:center;
-text-decoration:none;
 font-weight:bold;
 cursor:pointer;
 transition:0.3s;
+font-size:16px;
 }
 
 .whatsapp{
@@ -105,11 +107,12 @@ opacity:0.85;
 .footer{
 text-align:center;
 margin-top:30px;
-color:#777;
 font-size:14px;
+color:#777;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -117,17 +120,21 @@ font-size:14px;
 <div class="container">
 
 <div class="header">
+
 <h1>💅 Studio de Unhas</h1>
 
 <p>
-Agende seu horário facilmente pelo WhatsApp ✨
+Agende seu horário pelo WhatsApp ✨
 </p>
+
 </div>
 
 <div id="services"></div>
 
 <div class="footer">
+
 Atendimento com qualidade e carinho 💖
+
 </div>
 
 </div>
@@ -181,11 +188,11 @@ const container = document.getElementById('services');
 
 services.forEach(service=>{
 
-const card=document.createElement('div');
+const card = document.createElement('div');
 
 card.className='card';
 
-card.innerHTML=`
+card.innerHTML = `
 
 <h2>${service.name}</h2>
 
@@ -198,6 +205,7 @@ card.innerHTML=`
 <div class="buttons">
 
 <button class="btn whatsapp"
+
 onclick="marcarHorario('${service.name}','${service.price}')">
 
 📅 Marcar horário
@@ -205,9 +213,10 @@ onclick="marcarHorario('${service.name}','${service.price}')">
 </button>
 
 <button class="btn pix"
-onclick="copiarPix()">
 
-💳 Copiar Pix
+onclick="pagarPix('${service.name}','${service.price}')">
+
+💳 Pagar com Pix
 
 </button>
 
@@ -219,20 +228,14 @@ container.appendChild(card);
 
 });
 
-function copiarPix(){
-
-navigator.clipboard.writeText(pixKey);
-
-alert('Chave Pix copiada: ' + pixKey);
-
-}
-
 function marcarHorario(servico,preco){
 
 const data =
+
 document.getElementById('date-'+servico).value;
 
 const hora =
+
 document.getElementById('time-'+servico).value;
 
 const mensagem =
@@ -252,7 +255,24 @@ window.open(link,'_blank');
 
 }
 
+function pagarPix(servico,preco){
+
+navigator.clipboard.writeText(pixKey);
+
+alert(
+
+'Serviço: ' + servico +
+
+'\\nValor: ' + preco +
+
+'\\n\\nChave Pix copiada:\\n' + pixKey
+
+);
+
+}
+
 </script>
 
 </body>
+
 </html>
