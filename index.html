@@ -1,1 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studio de Unhas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
+    body {
+      background: linear-gradient(to bottom, #ffe6f0, #fff);
+      color: #333;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      color: #d63384;
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 18px;
+      color: #666;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover {
+      transform: scale(1.02);
+    }
+
+    .service-title {
+      font-size: 22px;
+      color: #c2185b;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+      padding: 12px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .pix {
+      background: #7b1fa2;
+      color: white;
+    }
+
+    .btn:hover {
+      opacity: 0.85;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #777;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="header">
+      <h1>Studio de Unhas</h1>
+      <p>Escolha seu serviço e fale conosco pelo WhatsApp 💅</p>
+    </div>
+
+    <div id="services"></div>
+
+    <div class="footer">
+      Atendimento rápido • Qualidade • Beleza ✨
+    </div>
+  </div>
+
+  <script>
+    const whatsapp = '5511954845853';
+    const pixKey = 'SUA_CHAVE_PIX_AQUI';
+
+    const services = [
+      {
+        name: 'Alongamento de fibra',
+        price: 'R$ 200'
+      },
+      {
+        name: 'Manutenção de alongamento de fibra',
+        price: 'R$ 120'
+      },
+      {
+        name: 'Alongamento de gel',
+        price: 'R$ 120'
+      },
+      {
+        name: 'Manutenção de gel',
+        price: 'R$ 80'
+      },
+      {
+        name: 'Banho de gel',
+        price: 'R$ 80'
+      },
+      {
+        name: 'Unha normal',
+        price: 'R$ 30'
+      },
+      {
+        name: 'Unha postiça',
+        price: 'R$ 100'
+      }
+    ];
+
+    const container = document.getElementById('services');
+
+    services.forEach(service => {
+      const message = `Olá! Tenho interesse no serviço: ${service.name} - ${service.price}`;
+      const whatsappLink = `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
+
+      const card = document.createElement('div');
+      card.className = 'service-card';
+
+      card.innerHTML = `
+        <div class="service-title">${service.name}</div>
+        <div class="price">${service.price}</div>
+
+        <div class="buttons">
+          <a class="btn whatsapp" href="${whatsappLink}" target="_blank">
+            Pedir no WhatsApp
+          </a>
+
+          <a class="btn pix" href="#" onclick="mostrarPix()">
+            Ver Pix
+          </a>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+
+    function mostrarPix() {
+      alert('Chave Pix: ' + pixKey);
+    }
+  </script>
+</body>
+</html>
