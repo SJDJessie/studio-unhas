@@ -2,277 +2,308 @@
 <html lang="pt-BR">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio de Unhas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-<meta charset="UTF-8">
+        body {
+            background: linear-gradient(to bottom, #ffe6f2, #ffffff);
+            padding: 20px;
+            padding-bottom: 160px; /* Espace pour ne pas cacher le contenu derrière la barre de total */
+            color:#333;
+        }
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
 
-<title>Studio de Unhas</title>
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-<style>
+        .header h1 {
+            font-size: 40px;
+            color: #d81b60;
+            margin-bottom: 10px;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
+        .header p {
+            font-size: 18px;
+            color: #666;
+        }
 
-body{
-background:linear-gradient(to bottom,#ffe6f2,#ffffff);
-padding:20px;
-color:#333;
-}
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
 
-.container{
-max-width:700px;
-margin:auto;
-}
+        /* Style quand la carte est sélectionnée */
+        .card.selected-card {
+            border: 2px solid #25D366;
+            background-color: #f6fff9;
+        }
 
-.header{
-text-align:center;
-margin-bottom:30px;
-}
+        .card h2 {
+            color: #c2185b;
+            margin-bottom: 10px;
+        }
 
-.header h1{
-font-size:40px;
-color:#d81b60;
-margin-bottom:10px;
-}
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
 
-.header p{
-font-size:18px;
-color:#666;
-}
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            background-color: #fff;
+        }
 
-.card{
-background:white;
-padding:20px;
-border-radius:20px;
-margin-bottom:20px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
 
-.card h2{
-color:#c2185b;
-margin-bottom:10px;
-}
+        .whatsapp {
+            background: #25D366;
+            color: white;
+        }
 
-.price{
-font-size:22px;
-font-weight:bold;
-margin-bottom:15px;
-}
+        /* Style du bouton quand il est sélectionné */
+        .whatsapp.active {
+            background: #128C7E;
+        }
 
-input{
-width:100%;
-padding:12px;
-margin-bottom:10px;
-border-radius:10px;
-border:1px solid #ccc;
-font-size:16px;
-}
+        .btn:hover {
+            opacity: 0.85;
+        }
 
-.buttons{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-}
+        /* BARRE DE TOTAL FIXE EN BAS */
+        .total-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #4a001f; /* Violet très foncé / Noir */
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+            display: none; /* Caché par défaut */
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
 
-.btn{
-flex:1;
-padding:12px;
-border:none;
-border-radius:12px;
-font-weight:bold;
-cursor:pointer;
-transition:0.3s;
-font-size:16px;
-}
+        .total-info {
+            text-align: center;
+        }
 
-.whatsapp{
-background:#25D366;
-color:white;
-}
+        .total-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
 
-.pix{
-background:#8e24aa;
-color:white;
-}
+        .total-details {
+            font-size: 13px;
+            color: #ffb3d1;
+            margin-top: 2px;
+        }
 
-.btn:hover{
-opacity:0.85;
-}
+        .pix-main {
+            background: #8e24aa;
+            color: white;
+            max-width: 400px;
+            border: 2px solid #b342cc;
+        }
 
-.footer{
-text-align:center;
-margin-top:30px;
-font-size:14px;
-color:#777;
-}
-
-</style>
-
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
-
-<div class="header">
-
-<h1>💅 Studio de Unhas</h1>
-
-<p>
-Agende seu horário pelo WhatsApp ✨
-</p>
-
-</div>
-
-<div id="services"></div>
-
-<div class="footer">
-
-Atendimento com qualidade e carinho 💖
-
-</div>
-
-</div>
-
-<script>
-
-const whatsapp = '5511954845853';
-
-const pixKey = 'simon.c.personnal@gmail.com';
-
-const services = [
-
-{
-name:'Alongamento de fibra',
-price:'R$ 200'
-},
-
-{
-name:'Manutenção de alongamento de fibra',
-price:'R$ 120'
-},
-
-{
-name:'Alongamento de gel',
-price:'R$ 120'
-},
-
-{
-name:'Manutenção de gel',
-price:'R$ 80'
-},
-
-{
-name:'Banho de gel',
-price:'R$ 80'
-},
-
-{
-name:'Unha normal',
-price:'R$ 30'
-},
-
-{
-name:'Unha postiça',
-price:'R$ 100'
-}
-
-];
-
-const container = document.getElementById('services');
-
-services.forEach(service=>{
-
-const card = document.createElement('div');
-
-card.className='card';
-
-card.innerHTML = `
-
-<h2>${service.name}</h2>
-
-<div class="price">${service.price}</div>
-
-<input type="date" id="date-${service.name}">
-
-<input type="time" id="time-${service.name}">
-
-<div class="buttons">
-
-<button class="btn whatsapp"
-
-onclick="marcarHorario('${service.name}','${service.price}')">
-
-📅 Marcar horário
-
-</button>
-
-<button class="btn pix"
-
-onclick="pagarPix('${service.name}','${service.price}')">
-
-💳 Pagar com Pix
-
-</button>
-
-</div>
-
-`;
-
-container.appendChild(card);
-
-});
-
-function marcarHorario(servico,preco){
-
-const data =
-
-document.getElementById('date-'+servico).value;
-
-const hora =
-
-document.getElementById('time-'+servico).value;
-
-const mensagem =
-
-`Olá! Quero agendar:
-
-Serviço: ${servico}
-Preço: ${preco}
-Data: ${data}
-Hora: ${hora}`;
-
-const link =
-
-`https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
-
-window.open(link,'_blank');
-
-}
-
-function pagarPix(servico,preco){
-
-navigator.clipboard.writeText(pixKey);
-
-alert(
-
-'Serviço: ' + servico +
-
-'\\nValor: ' + preco +
-
-'\\n\\nChave Pix copiada:\\n' + pixKey
-
-);
-
-}
-
-</script>
-
+    <div class="container">
+        <div class="header">
+            <h1>💅 Studio de Unhas</h1>
+            <p>Agende seu horário pelo WhatsApp ✨</p>
+        </div>
+
+        <div id="services"></div>
+
+        <div class="footer">
+            Atendimento com qualidade e carinho 💖
+        </div>
+    </div>
+
+    <div id="totalBar" class="total-bar">
+        <div class="total-info">
+            <div class="total-title" id="totalValue">Total: R$ 0</div>
+            <div class="total-details" id="totalDetails">Somme de: </div>
+        </div>
+        <button class="btn pix-main" onclick="pagarPixTotal()">
+            💳 Pagar todos com Pix
+        </button>
+    </div>
+
+    <script>
+        const whatsapp = '5511954845853';
+        const pixKey = 'simon.c.personnal@gmail.com';
+
+        const services = [
+            { id: 1, name: 'Alongamento de fibra', price: 200 },
+            { id: 2, name: 'Manutenção de alongamento de fibra', price: 120 },
+            { id: 3, name: 'Alongamento de gel', price: 120 },
+            { id: 4, name: 'Manutenção de gel', price: 80 },
+            { id: 5, name: 'Banho de gel', price: 80 },
+            { id: 6, name: 'Unha normal', price: 30 },
+            { id: 7, name: 'Unha postiça', price: 100 }
+        ];
+
+        // Stockage des services sélectionnés par l'utilisateur
+        let selectedServices = {};
+
+        const container = document.getElementById('services');
+
+        // Génération des cartes
+        services.forEach(service => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.id = `card-${service.id}`;
+
+            card.innerHTML = `
+                <h2>${service.name}</h2>
+                <div class="price">R$ ${service.price}</div>
+                <input type="date" id="date-${service.id}">
+                <input type="time" id="time-${service.id}">
+                <button class="btn whatsapp" id="btn-${service.id}" onclick="toggleService(${service.id})">
+                    <span>📅 Marcar horário</span>
+                </button>
+            `;
+            container.appendChild(card);
+        });
+
+        // Fonction pour sélectionner/désélectionner un service
+        function toggleService(id) {
+            const service = services.find(s => s.id === id);
+            const card = document.getElementById(`card-${id}`);
+            const btn = document.getElementById(`btn-${id}`);
+            const dateVal = document.getElementById(`date-${id}`).value;
+            const timeVal = document.getElementById(`time-${id}`).value;
+
+            // Si déjà sélectionné, on le retire
+            if (selectedServices[id]) {
+                delete selectedServices[id];
+                card.classList.remove('selected-card');
+                btn.classList.remove('active');
+                btn.innerHTML = `<span>📅 Marcar horário</span>`;
+            } 
+            // Sinon on l'ajoute
+            else {
+                selectedServices[id] = {
+                    name: service.name,
+                    price: service.price,
+                    date: dateVal || "(Data não definida)",
+                    time: timeVal || "(Hora não definida)"
+                };
+                card.classList.add('selected-card');
+                btn.classList.add('active');
+                btn.innerHTML = `<span>✅ Selecionado</span>`;
+            }
+
+            calculerSomme();
+        }
+
+        // Calcule et affiche la somme globale
+        function calculerSomme() {
+            const totalBar = document.getElementById('totalBar');
+            const totalValue = document.getElementById('totalValue');
+            const totalDetails = document.getElementById('totalDetails');
+            
+            let total = 0;
+            let detailsText = [];
+            let keys = Object.keys(selectedServices);
+
+            if (keys.length === 0) {
+                totalBar.style.display = 'none';
+                return;
+            }
+
+            keys.forEach(id => {
+                let s = selectedServices[id];
+                total += s.price;
+                detailsText.push(`${s.name} (${s.price})`);
+            });
+
+            // Mise à jour des textes de la barre
+            totalValue.textContent = `Total: R$ ${total}`;
+            totalDetails.textContent = `Somme de: ${detailsText.join(' + ')}`;
+            
+            // Affichage de la barre
+            totalBar.style.display = 'flex';
+        }
+
+        // Envoi groupé sur WhatsApp pour le paiement ou confirmation
+        function pagarPixTotal() {
+            navigator.clipboard.writeText(pixKey);
+
+            let total = 0;
+            let messageServices = "";
+
+            Object.keys(selectedServices).forEach(id => {
+                let s = selectedServices[id];
+                total += s.price;
+                messageServices += `\n- ${s.name} (R$ ${s.price})\n  Data: ${s.date} às ${s.time}\n`;
+            });
+
+            alert(
+                'Chave Pix copiada!\n\n' +
+                'Total a pagar: R$ ' + total + '\n' +
+                'Chave: ' + pixKey + '\n\n' +
+                'Après avoir validé, vous allez être redirigé vers WhatsApp pour confirmer vos choix.'
+            );
+
+            // Création du message WhatsApp récapitulatif complet
+            const mensagem = `Olá! Quero agendar os seguintes serviços:${messageServices}\n*Total Geral: R$ ${total}*`;
+            const link = `https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
+            window.open(link, '_blank');
+        }
+    </script>
 </body>
 
 </html>
