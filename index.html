@@ -40,7 +40,7 @@ body{
     color:white;
 
     padding:20px;
-    padding-bottom:210px; /* Aumentado um pouco para acomodar as informações do Pix */
+    padding-bottom:210px;
 }
 
 .container{
@@ -307,7 +307,6 @@ input:focus{
     color:#ccccd6;
 }
 
-/* Caixa com dados do Pix do proprietário */
 .pix-info-box {
     text-align: center;
     font-size: 14px;
@@ -410,8 +409,8 @@ Total: R$ 0
 </div>
 
 <div class="pix-info-box">
-    🔑 Chave Pix: <b>80000310948</b> <br>
-    👤 Titular: <b>Jessie Dieunie Cynthia Carriere</b>
+    🔑 Chave Pix: <b>simon.c.personnal@gmail.com</b> <br>
+    👤 Titular: <b>Simon Micha</b>
 </div>
 
 <button class="btn pix-btn" onclick="pagarPixTotal()">
@@ -424,7 +423,7 @@ Total: R$ 0
 
 const whatsapp = '5511954845853';
 
-const pixKey = '80000310948';
+const pixKey = 'simon.c.personnal@gmail.com';
 
 const services = [
 
@@ -618,6 +617,7 @@ Valor: R$ ${s.price}
 
 });
 
+// Ajout du message demandant le justificatif/comprovante
 const mensagem = `
 
 *STUDIO SJD*
@@ -634,11 +634,13 @@ Total Geral: R$ ${total}
 
 Pagamento via Pix
 
+Por favor, envie o comprovante de pagamento Pix por aqui para confirmar o seu agendamento. 📑
+
 Obrigado por escolher o Studio SJD!
 
 Será um prazer cuidar da sua beleza.
 
-Aguardo a confirmation do meu horário.
+Aguardo a confirmação do meu horário.
 
 Tenha um dia maravilhoso!
 
