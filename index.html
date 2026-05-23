@@ -1,654 +1,189 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Studio SJD</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-
-:root{
-    --pink:#ff2f7d;
-    --pink-light:#ff84b7;
-    --dark:#0d0d14;
-    --green:#25D366;
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-body{
-
-    background:
-    radial-gradient(circle at top left, rgba(255,47,125,0.25), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(255,47,125,0.15), transparent 25%),
-    linear-gradient(135deg,#09090d,#12121b,#171720);
-
-    min-height:100vh;
-    color:white;
-
-    padding:20px;
-    padding-bottom:210px;
-}
-
-.container{
-    max-width:650px;
-    margin:auto;
-}
-
-.header{
-    text-align:center;
-    padding:40px 20px;
-}
-
-.logo{
-
-    width:110px;
-    height:110px;
-
-    margin:auto;
-    margin-bottom:25px;
-
-    border-radius:50%;
-
-    background:linear-gradient(135deg,var(--pink),#ff84b7);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:42px;
-
-    box-shadow:0 0 40px rgba(255,47,125,0.5);
-}
-
-.header h1{
-
-    font-size:60px;
-    font-weight:800;
-
-    background:linear-gradient(to right,#fff,#ff9bc1);
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-
-    margin-bottom:10px;
-}
-
-.specialties{
-
-    color:#ff8fba;
-
-    letter-spacing:4px;
-    text-transform:uppercase;
-
-    margin-bottom:18px;
-
-    font-size:14px;
-}
-
-.subtitle{
-    color:#d0d0d9;
-    font-size:18px;
-}
-
-.whatsapp-top{
-
-    margin-top:25px;
-
-    display:inline-block;
-
-    padding:14px 22px;
-
-    border-radius:18px;
-
-    background:rgba(255,255,255,0.06);
-
-    border:1px solid rgba(255,255,255,0.08);
-
-    backdrop-filter:blur(12px);
-}
-
-.category-title{
-
-    margin:35px 0 20px;
-
-    font-size:24px;
-    font-weight:700;
-
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.category-title::after{
-
-    content:'';
-
-    flex:1;
-    height:2px;
-
-    background:linear-gradient(to right,var(--pink),transparent);
-}
-
-.card{
-
-    background:rgba(255,255,255,0.05);
-
-    border:1px solid rgba(255,255,255,0.08);
-
-    backdrop-filter:blur(12px);
-
-    border-radius:28px;
-
-    padding:24px;
-
-    margin-bottom:20px;
-
-    transition:0.3s;
-}
-
-.card:hover{
-
-    transform:translateY(-4px);
-
-    border-color:rgba(255,47,125,0.5);
-}
-
-.selected-card{
-
-    border-color:var(--pink);
-
-    box-shadow:0 0 25px rgba(255,47,125,0.4);
-}
-
-.card h2{
-
-    font-size:24px;
-
-    margin-bottom:8px;
-}
-
-.price{
-
-    font-size:30px;
-
-    font-weight:700;
-
-    color:var(--pink-light);
-
-    margin-bottom:20px;
-}
-
-.input-group{
-
-    display:flex;
-
-    gap:12px;
-
-    margin-bottom:18px;
-}
-
-input{
-
-    flex:1;
-
-    padding:15px;
-
-    border:none;
-
-    border-radius:16px;
-
-    background:rgba(255,255,255,0.08);
-
-    color:white;
-
-    outline:none;
-
-    font-size:15px;
-}
-
-input:focus{
-
-    border:1px solid var(--pink);
-
-    box-shadow:0 0 10px rgba(255,47,125,0.5);
-}
-
-.btn{
-
-    width:100%;
-
-    border:none;
-
-    border-radius:18px;
-
-    padding:16px;
-
-    font-size:17px;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:0.3s;
-}
-
-.whatsapp{
-
-    background:linear-gradient(135deg,var(--pink),#ff76ad);
-
-    color:white;
-}
-
-.whatsapp:hover{
-
-    transform:scale(1.02);
-
-    box-shadow:0 10px 20px rgba(255,47,125,0.35);
-}
-
-.whatsapp.active{
-
-    background:linear-gradient(135deg,#15b956,#25D366);
-}
-
-.total-bar{
-
-    position:fixed;
-
-    bottom:0;
-    left:0;
-
-    width:100%;
-
-    background:rgba(10,10,15,0.95);
-
-    border-top:1px solid rgba(255,255,255,0.08);
-
-    backdrop-filter:blur(14px);
-
-    padding:24px;
-
-    display:none;
-
-    flex-direction:column;
-
-    gap:15px;
-
-    z-index:999;
-}
-
-.total-title{
-
-    text-align:center;
-
-    font-size:30px;
-
-    font-weight:800;
-}
-
-.total-details{
-
-    text-align:center;
-
-    color:#ccccd6;
-}
-
-.pix-info-box {
-    text-align: center;
-    font-size: 14px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 10px;
-    border-radius: 14px;
-    color: #ff9bc1;
-}
-
-.pix-btn{
-
-    background:linear-gradient(135deg,#a239be,var(--pink));
-
-    color:white;
-}
-
-.footer{
-
-    text-align:center;
-
-    margin-top:50px;
-
-    color:#9f9fac;
-
-    font-size:14px;
-}
-
-@media(max-width:600px){
-
-.header h1{
-    font-size:44px;
-}
-
-.input-group{
-    flex-direction:column;
-}
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento - Espaço Estética</title>
+    <style>
+        :root {
+            --pink-main: #db7093;
+            --pink-light: #fff0f5;
+            --text-dark: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--pink-light);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            max-width: 500px;
+            width: 100%;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--pink-main);
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-style: italic;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .services-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .service-item {
+            border: 2px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover {
+            border-color: var(--pink-main);
+            background-color: #fff9fa;
+        }
+
+        .service-item.selected {
+            border-color: var(--pink-main);
+            background-color: var(--pink-light);
+            font-weight: bold;
+        }
+
+        .service-name {
+            font-size: 16px;
+        }
+
+        .service-price {
+            color: var(--pink-main);
+            font-size: 16px;
+        }
+
+        .checkout-section {
+            margin-top: 30px;
+            border-top: 2px dashed #eee;
+            padding-top: 20px;
+            display: none; /* Caché par défaut, affiché via JS */
+        }
+
+        .total-box {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .pix-btn {
+            background-color: #32bcad; /* Couleur officielle du Pix */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .pix-btn:hover {
+            background-color: #269c8f;
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="container">
+    <h1>Espaço Beleza & Estética</h1>
+    <p class="subtitle">Escolha o serviço desejado para agendar</p>
 
-<div class="header">
+    <!-- Lista de Serviços -->
+    <div class="services-list" id="servicesContainer"></div>
 
-<div class="logo">💖</div>
-
-<h1>Studio SJD</h1>
-
-<div class="specialties">
-Cabelo • Maquiagem • Unhas
-</div>
-
-<div class="subtitle">
-Agende seu horário pelo WhatsApp ✨
-</div>
-
-<div class="whatsapp-top">
-📲 Atendimento rápido e profissional
-</div>
-
-</div>
-
-<div class="category-title">
-💇‍♀️ Cabelo
-</div>
-
-<div id="cabelo-services"></div>
-
-<div class="category-title">
-💄 Maquiagem
-</div>
-
-<div id="maquiagem-services"></div>
-
-<div class="category-title">
-💅 Unhas
-</div>
-
-<div id="unhas-services"></div>
-
-<div class="footer">
-Studio SJD © Atendimento premium ✨
-</div>
-
-</div>
-
-<div id="totalBar" class="total-bar">
-
-<div class="total-title" id="totalValue">
-Total: R$ 0
-</div>
-
-<div class="total-details" id="totalDetails">
-</div>
-
-<div class="pix-info-box">
-    🔑 Chave Pix: <b>80000310948</b> <br>
-    👤 Titular: <b>Jessie Dieunie Cynthia Carriere</b>
-</div>
-
-<button class="btn pix-btn" onclick="pagarPixTotal()">
-💳 Pagar todos com Pix
-</button>
-
+    <!-- Seção de Pagamento -->
+    <div class="checkout-section" id="checkoutSection">
+        <div class="total-box">
+            <span>Total a pagar:</span>
+            <span id="totalPrice">R$ 0,00</span>
+        </div>
+        <button class="pix-btn" onclick="prosseguirPagamento()">Pagar com PIX</button>
+    </div>
 </div>
 
 <script>
-
-const whatsapp = '5548996743555';
-
-const pixKey = '80000310948';
-
-// Lista corrigida com todas as vírgulas e categorias certas!
-const services = [
-    { id:1, category:'cabelo', name:'Escova e Lavagem', price:60 },
-    { id:2, category:'cabelo', name:'Corte de Cabelo', price:80 },
-    { id:3, category:'maquiagem', name:'Maquiagem Simples', price:100 },
-    { id:4, category:'maquiagem', name:'Maquiagem Profissional', price:180 },
-    { id:5, category:'unhas', name:'Alongamento de fibra', price:200 },
-    { id:6, category:'unhas', name:'Manutenção de fibra', price:120 },
-    { id:7, category:'unhas', name:'Alongamento de gel', price:120 },
-    { id:8, category:'unhas', name:'Manutenção de gel', price:80 },
-    { id:9, category:'unhas', name:'Banho de gel', price:80 },
-    { id:10, category:'unhas', name:'Unha normal', price:30 },
-    { id:11, category:'unhas', name:'Unha postiça', price:100 }
-];
-
-let selectedServices = {};
-
-services.forEach(service => {
-
-const categoryContainer =
-document.getElementById(`${service.category}-services`);
-
-const card = document.createElement('div');
-
-card.className = 'card';
-
-card.id = `card-${service.id}`;
-
-card.innerHTML = `
-
-<h2>${service.name}</h2>
-
-<div class="price">
-R$ ${service.price}
-</div>
-
-<div class="input-group">
-
-<input type="date" id="date-${service.id}">
-
-<input type="time" id="time-${service.id}">
-
-</div>
-
-<button
-class="btn whatsapp"
-id="btn-${service.id}"
-onclick="toggleService(${service.id})">
-
-📅 Marcar horário
-
-</button>
-
-`;
-
-categoryContainer.appendChild(card);
-
-});
-
-function toggleService(id){
-
-const service =
-services.find(s => s.id === id);
-
-const card =
-document.getElementById(`card-${id}`);
-
-const btn =
-document.getElementById(`btn-${id}`);
-
-const dateVal =
-document.getElementById(`date-${id}`).value;
-
-const timeVal =
-document.getElementById(`time-${id}`).value;
-
-if(selectedServices[id]){
-
-delete selectedServices[id];
-
-card.classList.remove('selected-card');
-
-btn.classList.remove('active');
-
-btn.innerHTML = '📅 Marcar horário';
-
-}else{
-
-selectedServices[id] = {
-
-name: service.name,
-
-price: service.price,
-
-date: dateVal,
-
-time: timeVal
-
-};
-
-card.classList.add('selected-card');
-
-btn.classList.add('active');
-
-btn.innerHTML = '✅ Selecionado';
-
-}
-
-calculerSomme();
-
-}
-
-function calculerSomme(){
-
-const totalBar =
-document.getElementById('totalBar');
-
-const totalValue =
-document.getElementById('totalValue');
-
-const totalDetails =
-document.getElementById('totalDetails');
-
-let total = 0;
-
-let details = [];
-
-Object.keys(selectedServices).forEach(id => {
-
-total += selectedServices[id].price;
-
-details.push(selectedServices[id].name);
-
-});
-
-if(total <= 0){
-
-totalBar.style.display = 'none';
-
-return;
-
-}
-
-totalBar.style.display = 'flex';
-
-totalValue.innerHTML = `Total: R$ ${total}`;
-
-totalDetails.innerHTML = details.join(', ');
-
-}
-
-function pagarPixTotal(){
-
-navigator.clipboard.writeText(pixKey);
-
-let total = 0;
-
-let messageServices = '';
-
-Object.keys(selectedServices).forEach(id => {
-
-let s = selectedServices[id];
-
-total += s.price;
-
-let dataFormatada =
-s.date
-? s.date.split('-').reverse().join('/')
-: 'Não definida';
-
-let horaFormatada =
-s.time || 'Não definida';
-
-messageServices += `
-
-----------------------------
-
-${s.name}
-
-Data: ${dataFormatada}
-
-Hora: ${horaFormatada}
-
-Valor: R$ ${s.price}
-
-`;
-
-});
-
-const mensagem = `
-
-*STUDIO SJD*
-
-Olá 😊
-
-Gostaria de agendar os seguintes serviços:
-
-${messageServices}
-
-----------------------------
-
-Total Geral: R$ ${total}
-
-Pagamento via Pix
-
-Por favor, envie o comprovante de pagamento Pix por aqui para confirmar o seu agendamento. 📑
-
-Obrigado por escolher o Studio SJD!
-
-Será um prazer cuidar da sua beleza.
-
-Aguardo a confirmação do meu horário.
-
-Tenha um dia maravilhoso!
-
-`;
-
-const link =
-`https://api.whatsapp.com/send?phone=${whatsapp}&text=${encodeURIComponent(mensagem)}`;
-
-window.open(link,'_blank');
-
-}
-
+    // 1. Array de objetos contendo os serviços da sua irmã
+    const servicos = [
+        { id: 1, nome: "Alongamento de fibra", preco: 200 },
+        { id: 2, nome: "Manutenção de alongamento de fibra", preco: 120 },
+        { id: 3, nome: "Alongamento de gel", preco: 120 },
+        { id: 4, nome: "Manutenção de gel", preco: 80 },
+        { id: 5, nome: "Banho de gel", preco: 80 },
+        { id: 6, nome: "Unha normal", preco: 30 },
+        { id: 7, nome: "Unha postiça", preco: 100 }
+    ];
+
+    let servicoSelecionado = null;
+
+    // 2. Função para renderizar os serviços na tela (DOM)
+    const container = document.getElementById('servicesContainer');
+    
+    servicos.forEach(servico => {
+        const item = document.createElement('div');
+        item.classList.add('service-item');
+        item.setAttribute('data-id', servico.id);
+        item.innerHTML = `
+            <span class="service-name">${servico.nome}</span>
+            <span class="service-price">R$ ${servico.preco},00</span>
+        `;
+        
+        // Evento de clique para selecionar
+        item.addEventListener('click', () => selecionarServico(servico, item));
+        container.appendChild(item);
+    });
+
+    // 3. Lógica de seleção
+    function selecionarServico(servico, elemento) {
+        // Remove a seleção dos outros
+        document.querySelectorAll('.service-item').forEach(el => el.classList.remove('selected'));
+        
+        // Ativa o atual
+        elemento.classList.add('selected');
+        servicoSelecionado = servico;
+
+        // Atualiza e mostra a seção de pagamento
+        document.getElementById('totalPrice').innerText = `R$ ${servico.preco},00`;
+        document.getElementById('checkoutSection').style.display = 'block';
+    }
+
+    // 4. Ação do botão PIX
+    function prosseguirPagamento() {
+        if (servicoSelecionado) {
+            alert(`Você selecionou: ${servicoSelecionado.nome}\nValor: R$ ${servicoSelecionado.preco},00\n\nPróximo passo: Integração com o Pix!`);
+            // Aqui vamos programar a lógica para exibir a chave Pix ou gerar o QR Code.
+        }
+    }
 </script>
 
 </body>
