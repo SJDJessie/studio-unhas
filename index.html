@@ -1,23 +1,23 @@
-function pagarPixTotal(){
+function pagarPixTotal() {
 
-navigator.clipboard.writeText(pixKey);
+    navigator.clipboard.writeText(pixKey);
 
-let total = 0;
-let messageServices = '';
+    let total = 0;
+    let messageServices = '';
 
-Object.keys(selectedServices).forEach(id => {
+    Object.keys(selectedServices).forEach(id => {
 
-let s = selectedServices[id];
+        let s = selectedServices[id];
 
-total += s.price;
+        total += s.price;
 
-let dataFormatada = s.date
-? s.date.split('-').reverse().join('/')
-: 'Não definida';
+        let dataFormatada = s.date
+            ? s.date.split('-').reverse().join('/')
+            : 'Não definida';
 
-let horaFormatada = s.time || 'Não definida';
+        let horaFormatada = s.time || 'Não definida';
 
-messageServices += `
+        messageServices += `
 • ✨ ${s.name}
 📅 Data: ${dataFormatada}
 ⏰ Hora: ${horaFormatada}
@@ -25,14 +25,14 @@ messageServices += `
 
 `;
 
-});
+    });
 
-alert(
-'✨ Chave Pix copiada com sucesso!\\n\\n' +
-'Obrigado por escolher o Studio SJD 💖'
-);
+    alert(
+        '✨ Chave Pix copiada com sucesso!\\n\\n' +
+        '💖 Obrigado por escolher o Studio SJD!'
+    );
 
-const mensagem = `✨ *NOVO AGENDAMENTO - STUDIO SJD* ✨
+    const mensagem = `✨ *NOVO AGENDAMENTO - STUDIO SJD* ✨
 
 Olá 😊
 
@@ -54,9 +54,8 @@ Agradecemos pela confiança e preferência.
 
 💕 Tenha um dia maravilhoso!`;
 
-const link =
-`https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
+    const link =
+        `https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
 
-window.open(link,'_blank');
-
+    window.open(link, '_blank');
 }
