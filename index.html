@@ -406,9 +406,9 @@ Total: R$ 0
 
 <script>
 
-const whatsapp = '5548996743555';
+const whatsapp = '5511954845853';
 
-const pixKey = '80000310948';
+const pixKey = 'simon.c.personnal@gmail.com';
 
 const services = [
 
@@ -588,15 +588,15 @@ s.time || 'Não definida';
 
 messageServices += `
 
-━━━━━━━━━━━━━━━
+----------------------------
 
-✨ ${s.name}
+${s.name}
 
-📅 Data: ${dataFormatada}
+Data: ${dataFormatada}
 
-⏰ Hora: ${horaFormatada}
+Hora: ${horaFormatada}
 
-💰 Valor: R$ ${s.price}
+Valor: R$ ${s.price}
 
 `;
 
@@ -604,15 +604,15 @@ messageServices += `
 
 alert(
 
-'✨ Chave Pix copiada com sucesso!\\n\\n' +
+'Chave Pix copiada com sucesso!\\n\\n' +
 
-'💖 Obrigado por escolher o Studio SJD!'
+'Obrigado por escolher o Studio SJD!'
 
 );
 
 const mensagem = `
 
-✨ *STUDIO SJD* ✨
+*STUDIO SJD*
 
 Olá 😊
 
@@ -620,25 +620,24 @@ Gostaria de agendar os seguintes serviços:
 
 ${messageServices}
 
-━━━━━━━━━━━━━━━
+----------------------------
 
-💰 *Total Geral:* R$ ${total}
+Total Geral: R$ ${total}
 
-💳 Pagamento via Pix
+Pagamento via Pix
 
-💖 Obrigado por escolher o Studio SJD!
+Obrigado por escolher o Studio SJD!
 
-Será um prazer cuidar da sua beleza ✨
+Será um prazer cuidar da sua beleza.
 
-📲 Aguardo a confirmação do meu horário.
+Aguardo a confirmação do meu horário.
 
-💕 Tenha um dia maravilhoso!
+Tenha um dia maravilhoso!
 
 `;
 
 const link =
-
-`https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
+`https://api.whatsapp.com/send?phone=${whatsapp}&text=${encodeURIComponent(mensagem)}`;
 
 window.open(link,'_blank');
 
