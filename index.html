@@ -40,7 +40,7 @@ body{
     color:white;
 
     padding:20px;
-    padding-bottom:170px;
+    padding-bottom:210px; /* Aumentado um pouco para acomodar as informações do Pix */
 }
 
 .container{
@@ -307,6 +307,17 @@ input:focus{
     color:#ccccd6;
 }
 
+/* Caixa com dados do Pix do proprietário */
+.pix-info-box {
+    text-align: center;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 14px;
+    color: #ff9bc1;
+}
+
 .pix-btn{
 
     background:linear-gradient(135deg,#a239be,var(--pink));
@@ -398,6 +409,11 @@ Total: R$ 0
 <div class="total-details" id="totalDetails">
 </div>
 
+<div class="pix-info-box">
+    🔑 Chave Pix: <b>80000310948</b> <br>
+    👤 Titular: <b>Jessie Dieunie Cynthia Carriere</b>
+</div>
+
 <button class="btn pix-btn" onclick="pagarPixTotal()">
 💳 Pagar todos com Pix
 </button>
@@ -408,7 +424,7 @@ Total: R$ 0
 
 const whatsapp = '5511954845853';
 
-const pixKey = 'simon.c.personnal@gmail.com';
+const pixKey = '80000310948';
 
 const services = [
 
@@ -602,14 +618,6 @@ Valor: R$ ${s.price}
 
 });
 
-alert(
-
-'Chave Pix copiada com sucesso!\\n\\n' +
-
-'Obrigado por escolher o Studio SJD!'
-
-);
-
 const mensagem = `
 
 *STUDIO SJD*
@@ -630,7 +638,7 @@ Obrigado por escolher o Studio SJD!
 
 Será um prazer cuidar da sua beleza.
 
-Aguardo a confirmação do meu horário.
+Aguardo a confirmation do meu horário.
 
 Tenha um dia maravilhoso!
 
