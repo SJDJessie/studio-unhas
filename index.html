@@ -4,125 +4,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studio de Unhas</title>
+    <title>Studio SJD</title>
     <style>
+        :root {
+            --primary: #c2185b;
+            --primary-light: #ffe6f2;
+            --secondary: #8e24aa;
+            --success: #128C7E;
+            --success-light: #25D366;
+            --dark: #2d131e;
+            --text: #333333;
+            --bg-card: #ffffff;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: linear-gradient(to bottom, #ffe6f2, #ffffff);
+            background: linear-gradient(135deg, #fdf4f7 0%, #ffffff 100%);
             padding: 20px;
-            padding-bottom: 160px; /* Espace pour ne pas cacher le contenu derrière la barre de total */
-            color:#333;
+            padding-bottom: 150px; /* Évite que la barre du bas ne cache les services */
+            color: var(--text);
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 700px;
+            max-width: 600px;
             margin: auto;
         }
 
+        /* EN-TÊTE ÉLÉGANT ET NET */
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-top: 20px;
+            margin-bottom: 35px;
+            padding: 10px;
         }
 
         .header h1 {
-            font-size: 40px;
-            color: #d81b60;
-            margin-bottom: 10px;
+            font-size: 46px;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .header .specialties {
+            font-size: 15px;
+            font-weight: 600;
+            color: #b05a7e;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
         }
 
         .header p {
-            font-size: 18px;
-            color: #666;
+            font-size: 16px;
+            color: #777;
         }
 
+        /* TITRES DE CATÉGORIES DESIGN */
+        .category-title {
+            color: var(--dark);
+            font-size: 20px;
+            font-weight: 700;
+            margin: 35px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-light), transparent);
+        }
+
+        /* CARTES DE SERVICES ÉPURÉES */
         .card {
-            background: white;
-            padding: 20px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: 0.3s;
+            background: var(--bg-card);
+            padding: 22px;
+            border-radius: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 25px rgba(216, 27, 96, 0.05);
+            border: 1px solid rgba(216, 27, 96, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Style quand la carte est sélectionnée */
         .card.selected-card {
-            border: 2px solid #25D366;
-            background-color: #f6fff9;
+            border-color: var(--success-light);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.15);
+            background-color: #f7fdf9;
+            transform: translateY(-2px);
         }
 
         .card h2 {
-            color: #c2185b;
-            margin-bottom: 10px;
+            color: var(--dark);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 6px;
         }
 
         .price {
             font-size: 22px;
-            font-weight: bold;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 18px;
+        }
+
+        /* INPUTS MODERNES */
+        .input-group {
+            display: flex;
+            gap: 10px;
             margin-bottom: 15px;
         }
 
         input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            font-size: 16px;
+            flex: 1;
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid #e0e0e0;
+            font-size: 15px;
+            background-color: #fafafa;
+            color: var(--text);
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--primary);
             background-color: #fff;
         }
 
+        /* BOUTONS AVEC DES EFFETS MODERNES */
         .btn {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border: none;
-            border-radius: 12px;
-            font-weight: bold;
+            border-radius: 16px;
+            font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
             font-size: 16px;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease;
         }
 
         .whatsapp {
-            background: #25D366;
+            background: var(--success-light);
             color: white;
         }
 
-        /* Style du bouton quand il est sélectionné */
         .whatsapp.active {
-            background: #128C7E;
+            background: var(--success);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .btn:hover {
-            opacity: 0.85;
+            transform: translateY(-1px);
+            filter: brightness(1.03);
         }
 
-        /* BARRE DE TOTAL FIXE EN BAS */
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* BARRE DE TOTAL SUBLIME ET FIXE */
         .total-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: #4a001f; /* Violet très foncé / Noir */
+            background: linear-gradient(135deg, #2b0816 0%, var(--dark) 100%);
             color: white;
-            padding: 15px 20px;
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
-            display: none; /* Caché par défaut */
+            padding: 20px;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.25);
+            display: none;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
             z-index: 1000;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
+            border-top-left-radius: 28px;
+            border-top-right-radius: 28px;
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
         }
 
         .total-info {
@@ -130,28 +207,34 @@
         }
 
         .total-title {
-            font-size: 22px;
-            font-weight: bold;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .total-details {
             font-size: 13px;
-            color: #ffb3d1;
-            margin-top: 2px;
+            color: #ffccd8;
+            margin-top: 4px;
+            font-weight: 500;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .pix-main {
-            background: #8e24aa;
+            background: linear-gradient(135deg, #a239be 0%, var(--secondary) 100%);
             color: white;
             max-width: 400px;
-            border: 2px solid #b342cc;
+            box-shadow: 0 6px 15px rgba(142, 36, 170, 0.3);
         }
 
         .footer {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 45px;
             font-size: 14px;
-            color: #777;
+            color: #999;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -160,11 +243,19 @@
 
     <div class="container">
         <div class="header">
-            <h1>💅 Studio de Unhas</h1>
+            <h1>Studio SJD</h1>
+            <div class="specialties">Cabelo • Maquiagem • Unhas</div>
             <p>Agende seu horário pelo WhatsApp ✨</p>
         </div>
 
-        <div id="services"></div>
+        <div class="category-title">💇&zwj;♀️ Cabelo</div>
+        <div id="cabelo-services"></div>
+
+        <div class="category-title">💄 Maquiagem</div>
+        <div id="maquiagem-services"></div>
+
+        <div class="category-title">💅 Unhas</div>
+        <div id="unhas-services"></div>
 
         <div class="footer">
             Atendimento com qualidade e carinho 💖
@@ -174,7 +265,7 @@
     <div id="totalBar" class="total-bar">
         <div class="total-info">
             <div class="total-title" id="totalValue">Total: R$ 0</div>
-            <div class="total-details" id="totalDetails">Somme de: </div>
+            <div class="total-details" id="totalDetails">Selecionado: </div>
         </div>
         <button class="btn pix-main" onclick="pagarPixTotal()">
             💳 Pagar todos com Pix
@@ -182,26 +273,27 @@
     </div>
 
     <script>
-        const whatsapp = '5548996743555';
-        const pixKey = '80000310948';
+        const whatsapp = '5511954845853';
+        const pixKey = 'simon.c.personnal@gmail.com';
 
+        // Base de données des services
         const services = [
-            { id: 1, name: 'Alongamento de fibra', price: 200 },
-            { id: 2, name: 'Manutenção de alongamento de fibra', price: 120 },
-            { id: 3, name: 'Alongamento de gel', price: 120 },
-            { id: 4, name: 'Manutenção de gel', price: 80 },
-            { id: 5, name: 'Banho de gel', price: 80 },
-            { id: 6, name: 'Unha normal', price: 30 },
-            { id: 7, name: 'Unha postiça', price: 100 }
+            { id: 1, category: 'cabelo', name: 'Escova e Lavagem', price: 60 },
+            { id: 2, category: 'cabelo', name: 'Corte de Cabelo', price: 80 },
+            { id: 3, category: 'maquiagem', name: 'Maquiagem Simples', price: 100 },
+            { id: 4, category: 'maquiagem', name: 'Maquiagem Profissional', price: 180 },
+            { id: 5, category: 'unhas', name: 'Alongamento de fibra', price: 200 },
+            { id: 6, category: 'unhas', name: 'Manutenção de fibra', price: 120 },
+            { id: 7, category: 'unhas', name: 'Unha normal', price: 30 }
         ];
 
-        // Stockage des services sélectionnés par l'utilisateur
         let selectedServices = {};
 
-        const container = document.getElementById('services');
-
-        // Génération des cartes
+        // Construction de l'interface
         services.forEach(service => {
+            const categoryContainer = document.getElementById(`${service.category}-services`);
+            if (!categoryContainer) return;
+
             const card = document.createElement('div');
             card.className = 'card';
             card.id = `card-${service.id}`;
@@ -209,16 +301,18 @@
             card.innerHTML = `
                 <h2>${service.name}</h2>
                 <div class="price">R$ ${service.price}</div>
-                <input type="date" id="date-${service.id}">
-                <input type="time" id="time-${service.id}">
+                <div class="input-group">
+                    <input type="date" id="date-${service.id}">
+                    <input type="time" id="time-${service.id}">
+                </div>
                 <button class="btn whatsapp" id="btn-${service.id}" onclick="toggleService(${service.id})">
                     <span>📅 Marcar horário</span>
                 </button>
             `;
-            container.appendChild(card);
+            categoryContainer.appendChild(card);
         });
 
-        // Fonction pour sélectionner/désélectionner un service
+        // Logique de sélection
         function toggleService(id) {
             const service = services.find(s => s.id === id);
             const card = document.getElementById(`card-${id}`);
@@ -226,20 +320,25 @@
             const dateVal = document.getElementById(`date-${id}`).value;
             const timeVal = document.getElementById(`time-${id}`).value;
 
-            // Si déjà sélectionné, on le retire
             if (selectedServices[id]) {
                 delete selectedServices[id];
                 card.classList.remove('selected-card');
                 btn.classList.remove('active');
                 btn.innerHTML = `<span>📅 Marcar horário</span>`;
-            } 
-            // Sinon on l'ajoute
-            else {
+            } else {
+                // Formatage propre des dates pour l'affichage récapitulatif
+                let formattedDate = "(Sem data)";
+                if(dateVal) {
+                    const parts = dateVal.split('-');
+                    formattedDate = `${parts[2]}/${parts[1]}`;
+                }
+
                 selectedServices[id] = {
                     name: service.name,
                     price: service.price,
-                    date: dateVal || "(Data não definida)",
-                    time: timeVal || "(Hora não definida)"
+                    date: dateVal,
+                    formattedDate: formattedDate,
+                    time: timeVal || "(Sem hora)"
                 };
                 card.classList.add('selected-card');
                 btn.classList.add('active');
@@ -249,7 +348,7 @@
             calculerSomme();
         }
 
-        // Calcule et affiche la somme globale
+        // Calcul dynamique
         function calculerSomme() {
             const totalBar = document.getElementById('totalBar');
             const totalValue = document.getElementById('totalValue');
@@ -267,18 +366,15 @@
             keys.forEach(id => {
                 let s = selectedServices[id];
                 total += s.price;
-                detailsText.push(`${s.name} (${s.price})`);
+                detailsText.push(`${s.name}`);
             });
 
-            // Mise à jour des textes de la barre
             totalValue.textContent = `Total: R$ ${total}`;
-            totalDetails.textContent = `Somme de: ${detailsText.join(' + ')}`;
-            
-            // Affichage de la barre
+            totalDetails.textContent = `Selecionado: ${detailsText.join(', ')}`;
             totalBar.style.display = 'flex';
         }
 
-        // Envoi groupé sur WhatsApp pour le paiement ou confirmation
+        // Traitement de la commande finale
         function pagarPixTotal() {
             navigator.clipboard.writeText(pixKey);
 
@@ -288,18 +384,21 @@
             Object.keys(selectedServices).forEach(id => {
                 let s = selectedServices[id];
                 total += s.price;
-                messageServices += `\n- ${s.name} (R$ ${s.price})\n  Data: ${s.date} às ${s.time}\n`;
+                
+                // Formater la date en style Brésilien DD/MM/YYYY pour le message WhatsApp
+                let dataBr = s.date ? s.date.split('-').reverse().join('/') : "(Não definida)";
+                
+                messageServices += `\n• *${s.name}* (R$ ${s.price})\n  Data: ${dataBr} às ${s.time}\n`;
             });
 
             alert(
-                'Chave Pix copiada!\n\n' +
-                'Total a pagar: R$ ' + total + '\n' +
-                'Chave: ' + pixKey + '\n\n' +
-                'Après avoir validé, vous allez être redirigé vers WhatsApp pour confirmer vos choix.'
+                '✨ Chave Pix copiada com sucesso! \n\n' +
+                'Total: R$ ' + total + '\n' +
+                'Chave Pix: ' + pixKey + '\n\n' +
+                'Clique em OK para enviar os dados de agendamento pelo WhatsApp.'
             );
 
-            // Création du message WhatsApp récapitulatif complet
-            const mensagem = `Olá! Quero agendar os seguintes serviços:${messageServices}\n*Total Geral: R$ ${total}*`;
+            const mensagem = `Olá! Quero agendar os seguintes serviços no Studio SJD:${messageServices}\n*Total Geral: R$ ${total}*`;
             const link = `https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
             window.open(link, '_blank');
         }
