@@ -276,133 +276,20 @@
         const whatsapp = '5511954845853';
         const pixKey = 'simon.c.personnal@gmail.com';
 
-        // Base de données des services
+        // Lista de produtos atualizada com seus valores exatos
         const services = [
+            // --- CABELO ---
             { id: 1, category: 'cabelo', name: 'Escova e Lavagem', price: 60 },
             { id: 2, category: 'cabelo', name: 'Corte de Cabelo', price: 80 },
+
+            // --- MAQUIAGEM ---
             { id: 3, category: 'maquiagem', name: 'Maquiagem Simples', price: 100 },
             { id: 4, category: 'maquiagem', name: 'Maquiagem Profissional', price: 180 },
+
+            // --- UNHAS (Sua lista corrigida) ---
             { id: 5, category: 'unhas', name: 'Alongamento de fibra', price: 200 },
-            { id: 6, category: 'unhas', name: 'Manutenção de fibra', price: 120 },
-            { id: 7, category: 'unhas', name: 'Unha normal', price: 30 }
-        ];
-
-        let selectedServices = {};
-
-        // Construction de l'interface
-        services.forEach(service => {
-            const categoryContainer = document.getElementById(`${service.category}-services`);
-            if (!categoryContainer) return;
-
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.id = `card-${service.id}`;
-
-            card.innerHTML = `
-                <h2>${service.name}</h2>
-                <div class="price">R$ ${service.price}</div>
-                <div class="input-group">
-                    <input type="date" id="date-${service.id}">
-                    <input type="time" id="time-${service.id}">
-                </div>
-                <button class="btn whatsapp" id="btn-${service.id}" onclick="toggleService(${service.id})">
-                    <span>📅 Marcar horário</span>
-                </button>
-            `;
-            categoryContainer.appendChild(card);
-        });
-
-        // Logique de sélection
-        function toggleService(id) {
-            const service = services.find(s => s.id === id);
-            const card = document.getElementById(`card-${id}`);
-            const btn = document.getElementById(`btn-${id}`);
-            const dateVal = document.getElementById(`date-${id}`).value;
-            const timeVal = document.getElementById(`time-${id}`).value;
-
-            if (selectedServices[id]) {
-                delete selectedServices[id];
-                card.classList.remove('selected-card');
-                btn.classList.remove('active');
-                btn.innerHTML = `<span>📅 Marcar horário</span>`;
-            } else {
-                // Formatage propre des dates pour l'affichage récapitulatif
-                let formattedDate = "(Sem data)";
-                if(dateVal) {
-                    const parts = dateVal.split('-');
-                    formattedDate = `${parts[2]}/${parts[1]}`;
-                }
-
-                selectedServices[id] = {
-                    name: service.name,
-                    price: service.price,
-                    date: dateVal,
-                    formattedDate: formattedDate,
-                    time: timeVal || "(Sem hora)"
-                };
-                card.classList.add('selected-card');
-                btn.classList.add('active');
-                btn.innerHTML = `<span>✅ Selecionado</span>`;
-            }
-
-            calculerSomme();
-        }
-
-        // Calcul dynamique
-        function calculerSomme() {
-            const totalBar = document.getElementById('totalBar');
-            const totalValue = document.getElementById('totalValue');
-            const totalDetails = document.getElementById('totalDetails');
-            
-            let total = 0;
-            let detailsText = [];
-            let keys = Object.keys(selectedServices);
-
-            if (keys.length === 0) {
-                totalBar.style.display = 'none';
-                return;
-            }
-
-            keys.forEach(id => {
-                let s = selectedServices[id];
-                total += s.price;
-                detailsText.push(`${s.name}`);
-            });
-
-            totalValue.textContent = `Total: R$ ${total}`;
-            totalDetails.textContent = `Selecionado: ${detailsText.join(', ')}`;
-            totalBar.style.display = 'flex';
-        }
-
-        // Traitement de la commande finale
-        function pagarPixTotal() {
-            navigator.clipboard.writeText(pixKey);
-
-            let total = 0;
-            let messageServices = "";
-
-            Object.keys(selectedServices).forEach(id => {
-                let s = selectedServices[id];
-                total += s.price;
-                
-                // Formater la date en style Brésilien DD/MM/YYYY pour le message WhatsApp
-                let dataBr = s.date ? s.date.split('-').reverse().join('/') : "(Não definida)";
-                
-                messageServices += `\n• *${s.name}* (R$ ${s.price})\n  Data: ${dataBr} às ${s.time}\n`;
-            });
-
-            alert(
-                '✨ Chave Pix copiada com sucesso! \n\n' +
-                'Total: R$ ' + total + '\n' +
-                'Chave Pix: ' + pixKey + '\n\n' +
-                'Clique em OK para enviar os dados de agendamento pelo WhatsApp.'
-            );
-
-            const mensagem = `Olá! Quero agendar os seguintes serviços no Studio SJD:${messageServices}\n*Total Geral: R$ ${total}*`;
-            const link = `https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
-            window.open(link, '_blank');
-        }
-    </script>
-</body>
-
-</html>
+            { id: 6, category: 'unhas', name: 'Manutenção de alongamento de fibra', price: 120 },
+            { id: 7, category: 'unhas', name: 'Alongamento de gel', price: 120 },
+            { id: 8, category: 'unhas', name: 'Manutenção de gel', price: 80 },
+            { id: 9, category: 'unhas', name: 'Banho de gel', price: 80 },
+            { id: 10, category: 'un
