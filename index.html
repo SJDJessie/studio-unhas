@@ -1,3 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Studio SJD</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --pink:#ff2f7d;
+    --pink-light:#ff78ad;
+    --dark:#0d0d14;
+    --card:#171720;
+    --white:#ffffff;
+    --green:#25D366;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:
+    radial-gradient(circle at top left, rgba(255,47,125,0.25), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(255,47,125,0.15), transparent 25%),
+    linear-gradient(135deg,#09090d,#12121b,#171720);
+
+    min-height:100vh;
+    color:white;
+    padding:20px;
+    padding-bottom:160px;
+}
+
+.container{
+    max-width:650px;
+    margin:auto;
+}
+
+.header{
+    text-align:center;
+    padding:40px 20px;
+}
+
+.logo{
+    width:110px;
+    height:110px;
+    margin:auto;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--pink),#ff84b7);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:42px;
+    box-shadow:0 0 40px rgba(255,47,125,0.5);
+    margin-bottom:25px;
+}
+
+.header h1{
+    font-size:60px;
+    font-weight:800;
+    background:linear-gradient(to right,#fff,#ff9bc1);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:10px;
+}
+
+.specialties{
+    color:#ff8fba;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+    font-size:14px;
+}
+
+.subtitle{
+    color:#d0d0d9;
+    font-size:18px;
+}
+
+.whatsapp-top{
+    margin-top:25px;
+    display:inline-block;
+    padding:14px 22px;
+    border-radius:18px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+}
+
+.category-title{
+    margin:35px 0 20px;
+    font-size:24px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.category-title::after{
+    content:'';
+    flex:1;
+    height:2px;
+    background:linear-gradient(to right,var(--pink),transparent);
+}
+
+.card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+
+    border-radius:28px;
+    padding:24px;
+    margin-bottom:20px;
+
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(255,47,125,0.5);
+}
+
+.selected-card{
+    border-color:var(--pink);
+    box-shadow:0 0 25px rgba(255,47,125,0.4);
+}
+
+.card h2{
+    font-size:24px;
+    margin-bottom:8px;
+}
+
+.price{
+    font-size:30px;
+    font-weight:700;
+    color:var(--pink-light);
+    margin-bottom:20px;
+}
+
+.input-group{
+    display:flex;
+    gap:12px;
+    margin-bottom:18px;
+}
+
+input{
+    flex:1;
+    padding:15px;
+    border:none;
+    border-radius:16px;
+    background:rgba(255,255,255,0.08);
+    color:white;
+    outline:none;
+    font-size:15px;
+}
+
+input:focus{
+    border:1px solid var(--pink);
+    box-shadow:0 0 10px rgba(255,47,125,0.5);
+}
+
+.btn{
+    width:100%;
+    border:none;
+    border-radius:18px;
+    padding:16px;
+    font-size:17px;
+    font-weight:700;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.whatsapp{
+    background:linear-gradient(135deg,var(--pink),#ff76ad);
+    color:white;
+}
+
+.whatsapp:hover{
+    transform:scale(1.02);
+    box-shadow:0 10px 20px rgba(255,47,125,0.35);
+}
+
+.whatsapp.active{
+    background:linear-gradient(135deg,#15b956,#25D366);
+}
+
+.total-bar{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+
+    background:rgba(10,10,15,0.95);
+    border-top:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(14px);
+
+    padding:24px;
+
+    display:none;
+    flex-direction:column;
+    gap:15px;
+
+    z-index:999;
+}
+
+.total-title{
+    text-align:center;
+    font-size:30px;
+    font-weight:800;
+}
+
+.total-details{
+    text-align:center;
+    color:#ccccd6;
+}
+
+.pix-btn{
+    background:linear-gradient(135deg,#a239be,var(--pink));
+    color:white;
+}
+
+.footer{
+    text-align:center;
+    margin-top:50px;
+    color:#9f9fac;
+    font-size:14px;
+}
+
+@media(max-width:600px){
+
+    .header h1{
+        font-size:44px;
+    }
+
+    .input-group{
+        flex-direction:column;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<div class="logo">💖</div>
+
+<h1>Studio SJD</h1>
+
+<div class="specialties">
+Cabelo • Maquiagem • Unhas
+</div>
+
+<div class="subtitle">
+Agende seu horário pelo WhatsApp ✨
+</div>
+
+<div class="whatsapp-top">
+📲 Atendimento rápido e profissional
+</div>
+
+</div>
+
+<div class="category-title">💇‍♀️ Cabelo</div>
+<div id="cabelo-services"></div>
+
+<div class="category-title">💄 Maquiagem</div>
+<div id="maquiagem-services"></div>
+
+<div class="category-title">💅 Unhas</div>
+<div id="unhas-services"></div>
+
+<div class="footer">
+Studio SJD © Atendimento premium ✨
+</div>
+
+</div>
+
+<div id="totalBar" class="total-bar">
+
+<div class="total-title" id="totalValue">
+Total: R$ 0
+</div>
+
+<div class="total-details" id="totalDetails">
+</div>
+
+<button class="btn pix-btn" onclick="pagarPixTotal()">
+💳 Pagar todos com Pix
+</button>
+
+</div>
+
 <script>
 
 const whatsapp = '5511954845853';
@@ -147,65 +456,31 @@ function pagarPixTotal(){
 
 navigator.clipboard.writeText(pixKey);
 
-let total = 0;
+let total=0;
 
-let messageServices = '';
+let messageServices='';
 
-Object.keys(selectedServices).forEach(id => {
+Object.keys(selectedServices).forEach(id=>{
 
-let s = selectedServices[id];
+let s=selectedServices[id];
 
-total += s.price;
+total+=s.price;
 
-let dataFormatada = s.date
-? s.date.split('-').reverse().join('/')
-: 'Não definida';
-
-let horaFormatada = s.time || 'Não definida';
-
-messageServices += `
-━━━━━━━━━━━━━━━
-✨ ${s.name}
-
-📅 Data: ${dataFormatada}
-⏰ Hora: ${horaFormatada}
-💰 Valor: R$ ${s.price}
-`;
+messageServices+=`%0A• ${s.name} - R$ ${s.price}`;
 
 });
 
-alert(
-'✨ Chave Pix copiada com sucesso!\\n\\n' +
-'💖 Obrigado por escolher o Studio SJD!'
-);
+alert('✨ Chave Pix copiada com sucesso!');
 
-const mensagem = `✨ *STUDIO SJD* ✨
+const mensagem=`Olá! Quero agendar os seguintes serviços:${messageServices}%0A%0ATotal: R$ ${total}`;
 
-Olá 😊
-
-Gostaria de agendar os seguintes serviços:
-
-${messageServices}
-
-━━━━━━━━━━━━━━━
-
-💰 *Total Geral:* R$ ${total}
-
-💳 Pagamento via Pix
-
-💖 Obrigado por escolher o Studio SJD!
-
-Será um prazer cuidar da sua beleza ✨
-
-📲 Aguardo a confirmação do meu horário.
-
-💕 Tenha um dia maravilhoso!`;
-
-const link =
-`https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
+const link=`https://wa.me/${whatsapp}?text=${mensagem}`;
 
 window.open(link,'_blank');
 
 }
 
 </script>
+
+</body>
+</html>
