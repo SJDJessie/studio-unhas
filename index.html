@@ -362,7 +362,7 @@ input:focus{
 <h1>Studio SJD</h1>
 
 <div class="specialties">
-Procedimentos Premium
+Unhas • Maquiagem • Cabelo • Sobrancelha
 </div>
 
 <div class="subtitle">
@@ -376,10 +376,24 @@ Agende seu horário pelo WhatsApp ✨
 </div>
 
 <div class="category-title">
-✨ Nossos Serviços
+💅 Unhas
 </div>
-
 <div id="unhas-services"></div>
+
+<div class="category-title">
+💄 Maquiagem
+</div>
+<div id="maquiagem-services"></div>
+
+<div class="category-title">
+💇‍♀️ Cabelo
+</div>
+<div id="cabelo-services"></div>
+
+<div class="category-title">
+✨ Sobrancelha
+</div>
+<div id="sobrancelha-services"></div>
 
 <div class="footer">
 Studio SJD © Atendimento premium ✨
@@ -413,22 +427,32 @@ const whatsapp = '5548996743555';
 
 const pixKey = '80000310948';
 
+// Lista final e completa dividida por categorias certinhas
 const services = [
-    { id:1, category:'unhas', name:'Alongamento de fibra', price:200 },
-    { id:2, category:'unhas', name:'Manutenção de alongamento de fibra', price:120 },
-    { id:3, category:'unhas', name:'Alongamento de gel', price:120 },
-    { id:4, category:'unhas', name:'Manutenção de gel', price:80 },
-    { id:5, category:'unhas', name:'Banho de gel', price:80 },
-    { id:6, category:'unhas', name:'Unha normal', price:30 },
-    { id:7, category:'unhas', name:'Unha postiça', price:100 }
+    { id:1, category:'unhas', name:'Alongamento de fibra', price:200, isVariable:false },
+    { id:2, category:'unhas', name:'Manutenção de alongamento de fibra', price:120, isVariable:false },
+    { id:3, category:'unhas', name:'Alongamento de gel', price:120, isVariable:false },
+    { id:4, category:'unhas', name:'Manutenção de gel', price:80, isVariable:false },
+    { id:5, category:'unhas', name:'Banho de gel', price:80, isVariable:false },
+    { id:6, category:'unhas', name:'Unha normal', price:30, isVariable:false },
+    { id:7, category:'unhas', name:'Unha postiça', price:100, isVariable:false },
+    { id:8, category:'unhas', name:'Decoração adicional (por unha)', price:10, isVariable:false },
+    
+    { id:9, category:'maquiagem', name:'Maquiagem Personalizada (a partir de)', price:200, isVariable:false },
+    { id:10, category:'maquiagem', name:'Maquiagem para Casamento', price:500, isVariable:false },
+    { id:11, category:'maquiagem', name:'Maquiagem para Festa de Aniversário (Pacote)', price:500, isVariable:false },
+    
+    { id:12, category:'cabelo', name:'Trança de cabelo (Preço varia dependendo do modelo)', price:0, isVariable:true },
+    { id:13, category:'cabelo', name:'Colocação de vários tipos de trança e cabelo', price:0, isVariable:true },
+    
+    { id:14, category:'sobrancelha', name:'Sobrancelha', price:20, isVariable:false }
 ];
 
 let selectedServices = {};
 
 services.forEach(service => {
 
-const categoryContainer =
-document.getElementById(`${service.category}-services`);
+const categoryContainer = document.getElementById(`${service.category}-services`);
 
 const card = document.createElement('div');
 
@@ -436,12 +460,15 @@ card.className = 'card';
 
 card.id = `card-${service.id}`;
 
+// Formata a exibição do preço caso ele seja variável (Cabelo)
+const exibicaoPreco = service.isVariable ? 'A combinar' : `R$ ${service.price}`;
+
 card.innerHTML = `
 
 <h2>${service.name}</h2>
 
 <div class="price">
-R$ ${service.price}
+${exibicaoPreco}
 </div>
 
 <div class="input-group">
@@ -469,20 +496,15 @@ categoryContainer.appendChild(card);
 
 function toggleService(id){
 
-const service =
-services.find(s => s.id === id);
+const service = services.find(s => s.id === id);
 
-const card =
-document.getElementById(`card-${id}`);
+const card = document.getElementById(`card-${id}`);
 
-const btn =
-document.getElementById(`btn-${id}`);
+const btn = document.getElementById(`btn-${id}`);
 
-const dateVal =
-document.getElementById(`date-${id}`).value;
+const dateVal = document.getElementById(`date-${id}`).value;
 
-const timeVal =
-document.getElementById(`time-${id}`).value;
+const timeVal = document.getElementById(`time-${id}`).value;
 
 if(selectedServices[id]){
 
@@ -504,7 +526,9 @@ price: service.price,
 
 date: dateVal,
 
-time: timeVal
+time: timeVal,
+
+isVariable: service.isVariable
 
 };
 
@@ -522,20 +546,21 @@ calculerSomme();
 
 function calculerSomme(){
 
-const totalBar =
-document.getElementById('totalBar');
+const totalBar = document.getElementById('totalBar');
 
-const totalValue =
-document.getElementById('totalValue');
+const totalValue = document.getElementById('totalValue');
 
-const totalDetails =
-document.getElementById('totalDetails');
+const totalDetails = document.getElementById('totalDetails');
 
 let total = 0;
 
 let details = [];
 
+let temServicoSelecionado = false;
+
 Object.keys(selectedServices).forEach(id => {
+
+temServicoSelecionado = true;
 
 total += selectedServices[id].price;
 
@@ -543,7 +568,7 @@ details.push(selectedServices[id].name);
 
 });
 
-if(total <= 0){
+if(!temServicoSelecionado){
 
 totalBar.style.display = 'none';
 
@@ -573,13 +598,11 @@ let s = selectedServices[id];
 
 total += s.price;
 
-let dataFormatada =
-s.date
-? s.date.split('-').reverse().join('/')
-: 'Não definida';
+let dataFormatada = s.date ? s.date.split('-').reverse().join('/') : 'Não definida';
 
-let horaFormatada =
-s.time || 'Não definida';
+let horaFormatada = s.time || 'Não definida';
+
+let valorMensagem = s.isVariable ? 'A combinar' : `R$ ${s.price}`;
 
 messageServices += `
 
@@ -591,7 +614,7 @@ Data: ${dataFormatada}
 
 Hora: ${horaFormatada}
 
-Valor: R$ ${s.price}
+Valor: ${valorMensagem}
 
 `;
 
@@ -609,7 +632,7 @@ ${messageServices}
 
 ----------------------------
 
-Total Geral: R$ ${total}
+Total Geral: R$ ${total} ${total === 0 || Object.values(selectedServices).some(x => x.isVariable) ? '(Sujeito a alterações pelos itens a combinar)' : ''}
 
 Pagamento via Pix
 
@@ -619,14 +642,13 @@ Obrigado por escolher o Studio SJD!
 
 Será um prazer cuidar da sua beleza.
 
-Aguardo a confirmation do meu horário.
+Aguardo a confirmação do meu horário.
 
 Tenha um dia maravilhoso!
 
 `;
 
-const link =
-`https://api.whatsapp.com/send?phone=${whatsapp}&text=${encodeURIComponent(mensagem)}`;
+const link = `https://api.whatsapp.com/send?phone=${whatsapp}&text=${encodeURIComponent(mensagem)}`;
 
 window.open(link,'_blank');
 
